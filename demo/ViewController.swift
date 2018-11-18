@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     let startButton: UIButton
     let qtFoolingBgView: UIView = UIView.init(frame: CGRect.zero)
 
+    private let rotatedView = UIView(frame: .zero)
+
     // MARK: - UIViewController
     
     init() {
@@ -54,6 +56,8 @@ class ViewController: UIViewController {
         // barely visible tiny view for fooling Quicktime player. completely black images are ignored by QT
         self.view.addSubview(self.qtFoolingBgView)
         
+        self.view.addSubview(self.rotatedView)
+
         self.view.addSubview(self.startButton)
     }
     
@@ -82,6 +86,15 @@ class ViewController: UIViewController {
         )
 
         self.startButton.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        
+        self.rotatedView.backgroundColor = .black
+        let length = self.view.bounds.size.height * 0.6
+        self.rotatedView.frame = CGRect(
+            x: (self.view.bounds.size.width / 2.0) - (length / 2.0),
+            y: (self.view.bounds.size.height / 2.0) - (length / 2.0),
+            width: length,
+            height: length
+        )
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -105,6 +118,20 @@ class ViewController: UIViewController {
     }
     
     fileprivate func start() {
+        self.view.backgroundColor = .white
+
         self.audioPlayer.play()
+        
+        rotate(view: self.rotatedView, from: 0, to: CGFloat.pi * 2.0, duration: 240)
+    }
+    
+    private func rotate(view: UIView, from: CGFloat, to: CGFloat, duration: TimeInterval) {
+        let animation = CABasicAnimation(keyPath: "transform.rotation")
+        animation.fromValue = NSNumber(floatLiteral: Double(from))
+        animation.toValue = NSNumber(floatLiteral: Double(to))
+        animation.duration = duration
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        
+        view.layer.add(animation, forKey: "rotation")
     }
 }

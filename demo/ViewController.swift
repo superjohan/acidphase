@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     let contentView: UIView = UIView.init(frame: .zero)
     let qtFoolingBgView: UIView = UIView.init(frame: CGRect.zero)
 
-    private let rotatedView = UIView(frame: .zero)
+    private var rotatedViews = [UIView]()
 
     // MARK: - UIViewController
     
@@ -61,7 +61,12 @@ class ViewController: UIViewController {
         self.contentView.isHidden = true
         self.view.addSubview(self.contentView)
         
-        self.contentView.addSubview(self.rotatedView)
+        for _ in 0..<8 {
+            let rotatedView = UIView(frame: .zero)
+            rotatedView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.rotatedViews.append(rotatedView)
+            self.contentView.addSubview(rotatedView)
+        }
 
         self.view.addSubview(self.startButton)
     }
@@ -94,14 +99,15 @@ class ViewController: UIViewController {
         
         self.contentView.frame = self.view.bounds
         
-        self.rotatedView.backgroundColor = .black
-        let length = self.contentView.bounds.size.height * 0.6
-        self.rotatedView.frame = CGRect(
-            x: (self.contentView.bounds.size.width / 2.0) - (length / 2.0),
-            y: (self.contentView.bounds.size.height / 2.0) - (length / 2.0),
-            width: length,
-            height: length
-        )
+        for rotatedView in self.rotatedViews {
+            let length = self.contentView.bounds.size.height * 0.6
+            rotatedView.frame = CGRect(
+                x: (self.contentView.bounds.size.width / 2.0) - (length / 2.0),
+                y: (self.contentView.bounds.size.height / 2.0) - (length / 2.0),
+                width: length,
+                height: length
+            )
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -129,7 +135,13 @@ class ViewController: UIViewController {
         
         self.contentView.isHidden = false
         
-        rotate(view: self.rotatedView, from: 0, to: CGFloat.pi * 2.0, duration: 240)
+        let totalDuration = 240.0
+        let durationDelta = 7.0
+        
+        for (index, rotatedView) in self.rotatedViews.enumerated() {
+            let duration = TimeInterval(totalDuration - (Double(index) * durationDelta))
+            rotate(view: rotatedView, from: 0, to: CGFloat.pi * 2.0, duration: duration)
+        }
     }
     
     private func rotate(view: UIView, from: CGFloat, to: CGFloat, duration: TimeInterval) {

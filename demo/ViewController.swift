@@ -13,6 +13,7 @@ import Foundation
 class ViewController: UIViewController {
     let audioPlayer: AVAudioPlayer
     let startButton: UIButton
+    let contentView: UIView = UIView.init(frame: .zero)
     let qtFoolingBgView: UIView = UIView.init(frame: CGRect.zero)
 
     private let rotatedView = UIView(frame: .zero)
@@ -56,7 +57,11 @@ class ViewController: UIViewController {
         // barely visible tiny view for fooling Quicktime player. completely black images are ignored by QT
         self.view.addSubview(self.qtFoolingBgView)
         
-        self.view.addSubview(self.rotatedView)
+        self.contentView.backgroundColor = .white
+        self.contentView.isHidden = true
+        self.view.addSubview(self.contentView)
+        
+        self.contentView.addSubview(self.rotatedView)
 
         self.view.addSubview(self.startButton)
     }
@@ -87,11 +92,13 @@ class ViewController: UIViewController {
 
         self.startButton.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
         
+        self.contentView.frame = self.view.bounds
+        
         self.rotatedView.backgroundColor = .black
-        let length = self.view.bounds.size.height * 0.6
+        let length = self.contentView.bounds.size.height * 0.6
         self.rotatedView.frame = CGRect(
-            x: (self.view.bounds.size.width / 2.0) - (length / 2.0),
-            y: (self.view.bounds.size.height / 2.0) - (length / 2.0),
+            x: (self.contentView.bounds.size.width / 2.0) - (length / 2.0),
+            y: (self.contentView.bounds.size.height / 2.0) - (length / 2.0),
             width: length,
             height: length
         )
@@ -118,9 +125,9 @@ class ViewController: UIViewController {
     }
     
     fileprivate func start() {
-        self.view.backgroundColor = .white
-
         self.audioPlayer.play()
+        
+        self.contentView.isHidden = false
         
         rotate(view: self.rotatedView, from: 0, to: CGFloat.pi * 2.0, duration: 240)
     }

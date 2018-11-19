@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     let contentView: UIView = UIView.init(frame: .zero)
     let qtFoolingBgView: UIView = UIView.init(frame: CGRect.zero)
 
-    private var rotatedViews = [UIView]()
+    private var rotatedViews = [ShufflingView]()
 
     // MARK: - UIViewController
     
@@ -62,8 +62,7 @@ class ViewController: UIViewController {
         self.view.addSubview(self.contentView)
         
         for _ in 0..<8 {
-            let rotatedView = UIView(frame: .zero)
-            rotatedView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            let rotatedView = ShufflingView(frame: .zero)
             self.rotatedViews.append(rotatedView)
             self.contentView.addSubview(rotatedView)
         }
@@ -107,6 +106,8 @@ class ViewController: UIViewController {
                 width: length,
                 height: length
             )
+            
+            rotatedView.adjustViews()
         }
     }
     

@@ -9,6 +9,8 @@
 import UIKit
 
 class ShufflingView: UIView {
+    private(set) var currentBoard: Board?
+
     private let containerView = UIView(frame: .zero)
     private let squares: [UIView]
     
@@ -69,5 +71,7 @@ class ShufflingView: UIView {
         } else {
             block()
         }
+        
+        self.currentBoard = board
     }
 }

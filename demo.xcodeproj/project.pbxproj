@@ -12,6 +12,7 @@
 		9042B72C2056F88C000DB49A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9042B72B2056F88C000DB49A /* Assets.xcassets */; };
 		9042B72F2056F88C000DB49A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9042B72D2056F88C000DB49A /* LaunchScreen.storyboard */; };
 		90B7A0DD21A321320006838D /* ShufflingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B7A0DC21A321320006838D /* ShufflingView.swift */; };
+		90B7A0DF21A3276F0006838D /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B7A0DE21A3276F0006838D /* Board.swift */; };
 		90E5B8D721A1C64E001D2F38 /* audio.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 90E5B8D621A1C64E001D2F38 /* audio.m4a */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		9042B72E2056F88C000DB49A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9042B7302056F88C000DB49A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90B7A0DC21A321320006838D /* ShufflingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShufflingView.swift; sourceTree = "<group>"; };
+		90B7A0DE21A3276F0006838D /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		90E5B8D621A1C64E001D2F38 /* audio.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +60,7 @@
 			children = (
 				9042B7242056F88C000DB49A /* AppDelegate.swift */,
 				9042B7262056F88C000DB49A /* ViewController.swift */,
+				90B7A0DE21A3276F0006838D /* Board.swift */,
 				90B7A0DC21A321320006838D /* ShufflingView.swift */,
 				9042B72B2056F88C000DB49A /* Assets.xcassets */,
 				9042B72D2056F88C000DB49A /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			files = (
 				90B7A0DD21A321320006838D /* ShufflingView.swift in Sources */,
 				9042B7272056F88C000DB49A /* ViewController.swift in Sources */,
+				90B7A0DF21A3276F0006838D /* Board.swift in Sources */,
 				9042B7252056F88C000DB49A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

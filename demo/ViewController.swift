@@ -107,7 +107,7 @@ class ViewController: UIViewController {
                 height: length
             )
             
-            rotatedView.adjustViews()
+            rotatedView.adjustViews(toBoard: Board.initialBoard(), animated: false)
         }
     }
     

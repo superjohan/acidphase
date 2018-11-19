@@ -35,7 +35,7 @@ class ShufflingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func adjustViews() {
+    func adjustViews(toBoard board: Board, animated: Bool) {
         let length = self.bounds.size.width / 4.0 // assume we're square. which we know we are :)
         let containerLength = length * 6.0
 
@@ -46,16 +46,28 @@ class ShufflingView: UIView {
             height: containerLength
         )
 
-        for (index, view) in self.squares.enumerated() {
-            let row = CGFloat(index / 4)
-            let column = CGFloat(index % 4)
-            
-            view.frame = CGRect(
-                x: length + (column * length),
-                y: length + (row * length),
-                width: length,
-                height: length
-            )
+        let block = {
+            for (row, rowContents) in board.contents.enumerated() {
+                for (column, index) in rowContents.enumerated() {
+                    if index == 0 {
+                        continue
+                    }
+                    
+                    let view = self.squares[index - 1]
+                    view.frame = CGRect(
+                        x: (CGFloat(column) * length),
+                        y: (CGFloat(row) * length),
+                        width: length,
+                        height: length
+                    )
+                }
+            }
+        }
+        
+        if (animated) {
+            UIView.animate(withDuration: 0.2, animations: block)
+        } else {
+            block()
         }
     }
 }

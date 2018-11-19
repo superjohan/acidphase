@@ -143,6 +143,30 @@ class ViewController: UIViewController {
             let duration = TimeInterval(totalDuration - (Double(index) * durationDelta))
             rotate(view: rotatedView, from: 0, to: CGFloat.pi * 2.0, duration: duration)
         }
+        
+        scheduleEvents()
+    }
+    
+    private func scheduleEvents() {
+        let interval = 120.0 / 130.0
+        var position = 0.0
+        var counter = 1
+        
+        while position < 240.0 {
+            position = Double(counter) * interval
+            perform(#selector(refreshBoards), with: nil, afterDelay: position)
+            
+            counter += 1
+        }
+    }
+    
+    @objc
+    private func refreshBoards() {
+        for rotatedView in self.rotatedViews {
+            guard let board = rotatedView.currentBoard else { continue }
+            
+            rotatedView.adjustViews(toBoard: Board.boardByMovingOnePosition(fromBoard: board), animated: true)
+        }
     }
     
     private func rotate(view: UIView, from: CGFloat, to: CGFloat, duration: TimeInterval) {

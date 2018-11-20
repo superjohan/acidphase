@@ -158,6 +158,9 @@ class ViewController: UIViewController {
             
             counter += 1
         }
+        
+        position = Double(counter) * interval
+        perform(#selector(resetBoards), with: nil, afterDelay: position)
     }
     
     @objc
@@ -166,6 +169,13 @@ class ViewController: UIViewController {
             guard let board = rotatedView.currentBoard else { continue }
             
             rotatedView.adjustViews(toBoard: Board.boardByMovingOnePosition(fromBoard: board), animated: true)
+        }
+    }
+    
+    @objc
+    private func resetBoards() {
+        for rotatedView in self.rotatedViews {
+            rotatedView.adjustViews(toBoard: Board.initialBoard(), animated: true)
         }
     }
     

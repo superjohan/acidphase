@@ -20,6 +20,9 @@ class ViewController: UIViewController {
     
     private var rotatedViews = [ShufflingView]()
 
+    private var sequences = [[Board]]()
+    private var sequenceCounter = 0
+    
     // MARK: - UIViewController
     
     init() {
@@ -49,6 +52,8 @@ class ViewController: UIViewController {
         self.startButton.backgroundColor = UIColor.black
         
         super.init(nibName: nil, bundle: nil)
+        
+        createBoards()
         
         self.startButton.addTarget(self, action: #selector(startButtonTouched), for: UIControl.Event.touchUpInside)
         
@@ -121,6 +126,22 @@ class ViewController: UIViewController {
     
     // MARK: - Private
     
+    private func createBoards() {
+        var baseBoards = [Board]()
+        baseBoards.append(Board.boardByMovingOnePosition(fromBoard: Board.initialBoard()))
+        
+        for i in 1..<self.sequenceCount {
+            let previousBoard = baseBoards[i - 1]
+            baseBoards.append(Board.boardByMovingOnePosition(fromBoard: previousBoard))
+        }
+        
+        self.sequences.append(baseBoards)
+        
+        for _ in 1..<8 {
+            self.sequences.append(baseBoards)
+        }
+    }
+    
     @objc
     fileprivate func startButtonTouched(button: UIButton) {
         self.startButton.isUserInteractionEnabled = false
@@ -167,11 +188,14 @@ class ViewController: UIViewController {
     
     @objc
     private func refreshBoards() {
-        for rotatedView in self.rotatedViews {
-            guard let board = rotatedView.currentBoard else { continue }
+        for (index, rotatedView) in self.rotatedViews.enumerated() {
+            let sequence = self.sequences[index]
+            let board = sequence[self.sequenceCounter]
             
-            rotatedView.adjustViews(toBoard: Board.boardByMovingOnePosition(fromBoard: board), animated: true)
+            rotatedView.adjustViews(toBoard: board, animated: true)
         }
+
+        self.sequenceCounter += 1
     }
     
     @objc

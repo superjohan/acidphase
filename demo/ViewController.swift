@@ -152,7 +152,7 @@ class ViewController: UIViewController {
         var position = -0.1
         var counter = 1
         
-        while position < 240.0 {
+        while counter < 260 {
             position = Double(counter) * interval
             perform(#selector(refreshBoards), with: nil, afterDelay: position)
             

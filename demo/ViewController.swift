@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     private let rotatedViewCount = 7
     
     private var rotatedViews = [ShufflingView]()
-
     private var sequences = [[Board]]()
     private var sequenceCounter = 0
     

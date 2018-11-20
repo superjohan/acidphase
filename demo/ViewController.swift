@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     let qtFoolingBgView: UIView = UIView.init(frame: CGRect.zero)
 
     private let sequenceCount = 260
-    private let rotatedViewCount = 7
+    private let rotatedViewCount = 8
     
     private var rotatedViews = [ShufflingView]()
     private var sequences = [[Board]]()
@@ -136,10 +136,12 @@ class ViewController: UIViewController {
         }
         
         self.sequences.append(baseBoards)
+
+        let initialOffset = 30
         
         for i in 1..<self.rotatedViewCount {
             var boards = [Board]()
-            let offset = 25 * i
+            let offset = initialOffset + (16 * (i - 1))
             
             for (index, board) in baseBoards.enumerated() {
                 if (index < offset || index > (self.sequenceCount - offset)) {

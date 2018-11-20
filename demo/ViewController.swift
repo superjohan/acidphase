@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     let contentView: UIView = UIView.init(frame: .zero)
     let qtFoolingBgView: UIView = UIView.init(frame: CGRect.zero)
 
+    private let sequenceCount = 260
+    
     private var rotatedViews = [ShufflingView]()
 
     // MARK: - UIViewController
@@ -152,7 +154,7 @@ class ViewController: UIViewController {
         var position = -0.1
         var counter = 1
         
-        while counter < 260 {
+        while counter < self.sequenceCount {
             position = Double(counter) * interval
             perform(#selector(refreshBoards), with: nil, afterDelay: position)
             

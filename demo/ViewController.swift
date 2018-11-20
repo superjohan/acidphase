@@ -149,7 +149,7 @@ class ViewController: UIViewController {
     
     private func scheduleEvents() {
         let interval = 120.0 / 130.0
-        var position = 0.0
+        var position = -0.1
         var counter = 1
         
         while position < 240.0 {

@@ -137,8 +137,19 @@ class ViewController: UIViewController {
         
         self.sequences.append(baseBoards)
         
-        for _ in 1..<8 {
-            self.sequences.append(baseBoards)
+        for i in 1..<self.rotatedViewCount {
+            var boards = [Board]()
+            let offset = 25 * i
+            
+            for (index, board) in baseBoards.enumerated() {
+                if (index < offset || index > (self.sequenceCount - offset)) {
+                    boards.append(board)
+                } else {
+                    boards.append(Board.boardByMovingOnePosition(fromBoard: boards[index - 1]))
+                }
+            }
+
+            self.sequences.append(boards)
         }
     }
     

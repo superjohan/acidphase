@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     let qtFoolingBgView: UIView = UIView.init(frame: CGRect.zero)
 
     private let sequenceCount = 260
+    private let rotatedViewCount = 7
     
     private var rotatedViews = [ShufflingView]()
 
@@ -68,7 +69,7 @@ class ViewController: UIViewController {
         self.contentView.isHidden = true
         self.view.addSubview(self.contentView)
         
-        for _ in 0..<8 {
+        for _ in 0..<self.rotatedViewCount {
             let rotatedView = ShufflingView(frame: .zero)
             self.rotatedViews.append(rotatedView)
             self.contentView.addSubview(rotatedView)

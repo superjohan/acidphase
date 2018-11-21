@@ -217,14 +217,7 @@ class ViewController: UIViewController {
             rotatedView.adjustViews(toBoard: board, animated: true)
 
             if self.sequenceCounter == self.sequenceCount / 4 {
-                let x: CGFloat
-                if index % 3 == 0 {
-                    x = rotatedView.center.x - rotatedView.bounds.size.width
-                } else if index % 3 == 1 {
-                    x = rotatedView.center.x + rotatedView.bounds.size.width
-                } else {
-                    x = rotatedView.center.x
-                }
+                let x: CGFloat = (CGFloat(index) / CGFloat(self.rotatedViewCount)) * self.view.bounds.width
                 
                 UIView.animate(withDuration: 180 / Constants.timeDivider, delay: 0, options: [], animations: {
                     rotatedView.center.x = x

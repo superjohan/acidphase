@@ -227,7 +227,7 @@ class ViewController: UIViewController {
             }
         }
 
-        if self.sequenceCounter == self.sequenceCount - 35 {
+        if self.sequenceCounter == self.sequenceCount - 33 {
             for view in self.rotatedViews {
                 view.endRotation()
             }

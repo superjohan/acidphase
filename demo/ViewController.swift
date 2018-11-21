@@ -216,7 +216,11 @@ class ViewController: UIViewController {
             
             rotatedView.adjustViews(toBoard: board, animated: true)
         }
-
+        
+        if self.sequenceCounter == self.sequenceCount / 4 {
+            self.rotatedViews[Int.random(in: 0..<self.rotatedViewCount)].startRotation()
+        }
+        
         if self.sequenceCounter == self.sequenceCount / 2 {
             for view in self.rotatedViews {
                 view.startRotation()

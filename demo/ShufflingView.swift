@@ -76,7 +76,7 @@ class ShufflingView: UIView {
     }
     
     func startRotation() {
-        UIView.animate(withDuration: 100, animations: {
+        UIView.animate(withDuration: 100, delay: 0, options: [.beginFromCurrentState, .overrideInheritedCurve], animations: {
             let angle = CGFloat.random(in: 3..<6.2)
             let x = CGFloat.random(in: 0..<1.0)
             let y = CGFloat.random(in: 0..<1.0)

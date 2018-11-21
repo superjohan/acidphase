@@ -130,9 +130,16 @@ class ViewController: UIViewController {
         var baseBoards = [Board]()
         baseBoards.append(Board.boardByMovingOnePosition(fromBoard: Board.initialBoard()))
         
+        let middle = (self.sequenceCount / 2)
+
         for i in 1..<self.sequenceCount {
             let previousBoard = baseBoards[i - 1]
-            baseBoards.append(Board.boardByMovingOnePosition(fromBoard: previousBoard))
+
+            if i > middle {
+                baseBoards.append(baseBoards[self.sequenceCount - i - 1])
+            } else {
+                baseBoards.append(Board.boardByMovingOnePosition(fromBoard: previousBoard))
+            }
         }
         
         self.sequences.append(baseBoards)
@@ -144,7 +151,9 @@ class ViewController: UIViewController {
             let offset = initialOffset + (16 * (i - 1))
             
             for (index, board) in baseBoards.enumerated() {
-                if (index < offset || index > (self.sequenceCount - offset)) {
+                if (index > middle) {
+                    boards.append(boards[self.sequenceCount - index - 1])
+                } else if (index < offset || index > (self.sequenceCount - offset)) {
                     boards.append(board)
                 } else {
                     boards.append(Board.boardByMovingOnePosition(fromBoard: boards[index - 1]))

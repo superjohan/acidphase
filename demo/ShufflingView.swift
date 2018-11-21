@@ -67,7 +67,7 @@ class ShufflingView: UIView {
         }
         
         if (animated) {
-            UIView.animate(withDuration: 0.2, animations: block)
+            UIView.animate(withDuration: 0.2 / Constants.timeDivider, animations: block)
         } else {
             block()
         }
@@ -76,7 +76,7 @@ class ShufflingView: UIView {
     }
     
     func startRotation() {
-        UIView.animate(withDuration: 100, delay: 0, options: [.beginFromCurrentState, .overrideInheritedCurve], animations: {
+        UIView.animate(withDuration: 100 / Constants.timeDivider, delay: 0, options: [.beginFromCurrentState, .overrideInheritedCurve], animations: {
             let angle = CGFloat.random(in: 3..<6.2)
             let x = CGFloat.random(in: 0..<1.0)
             let y = CGFloat.random(in: 0..<1.0)
@@ -86,7 +86,7 @@ class ShufflingView: UIView {
     }
     
     func endRotation() {
-        UIView.animate(withDuration: 30, delay: 0, options: [.beginFromCurrentState, .overrideInheritedCurve], animations: {
+        UIView.animate(withDuration: 30 / Constants.timeDivider, delay: 0, options: [.beginFromCurrentState, .overrideInheritedCurve], animations: {
             self.containerView.layer.transform = CATransform3DIdentity
         }, completion: nil)
     }

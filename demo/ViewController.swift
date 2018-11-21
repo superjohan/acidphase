@@ -181,8 +181,8 @@ class ViewController: UIViewController {
         
         self.contentView.isHidden = false
         
-        let totalDuration = 240.0
-        let durationDelta = 7.0
+        let totalDuration = 240.0 / Constants.timeDivider
+        let durationDelta = 7.0 / Constants.timeDivider
         
         for (index, rotatedView) in self.rotatedViews.enumerated() {
             let duration = TimeInterval(totalDuration - (Double(index) * durationDelta))
@@ -193,7 +193,7 @@ class ViewController: UIViewController {
     }
     
     private func scheduleEvents() {
-        let interval = 120.0 / 130.0
+        let interval = 120.0 / 130.0 / Constants.timeDivider
         var position = -0.1
         var counter = 1
         
@@ -252,4 +252,8 @@ class ViewController: UIViewController {
         
         view.layer.add(animation, forKey: "rotation")
     }
+}
+
+struct Constants {
+    static let timeDivider = 1.0
 }

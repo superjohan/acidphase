@@ -217,6 +217,18 @@ class ViewController: UIViewController {
             rotatedView.adjustViews(toBoard: board, animated: true)
         }
 
+        if self.sequenceCounter == self.sequenceCount / 2 {
+            for view in self.rotatedViews {
+                view.startRotation()
+            }
+        }
+
+        if self.sequenceCounter == self.sequenceCount - 40 {
+            for view in self.rotatedViews {
+                view.endRotation()
+            }
+        }
+        
         self.sequenceCounter += 1
     }
     

@@ -130,7 +130,7 @@ class ViewController: UIViewController {
         var baseBoards = [Board]()
         baseBoards.append(Board.boardByMovingOnePosition(fromBoard: Board.initialBoard()))
         
-        let middle = (self.sequenceCount / 2)
+        let middle = (self.sequenceCount / 2) - 1
 
         for i in 1..<self.sequenceCount {
             let previousBoard = baseBoards[i - 1]

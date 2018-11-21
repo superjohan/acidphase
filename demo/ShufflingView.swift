@@ -80,7 +80,7 @@ class ShufflingView: UIView {
             let angle = CGFloat.random(in: 3..<6.2)
             let x = CGFloat.random(in: 0..<1.0)
             let y = CGFloat.random(in: 0..<1.0)
-            print("\(angle) \(x) \(y)")
+
             self.containerView.layer.transform = CATransform3DRotate(self.containerView.layer.transform, angle, x, y, 0)
         })
     }

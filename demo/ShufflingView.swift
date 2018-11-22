@@ -13,13 +13,16 @@ class ShufflingView: UIView {
 
     private let containerView = UIView(frame: .zero)
     private let squares: [UIView]
+    private let fadeColor: UIColor
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, color: UIColor) {
+        self.fadeColor = color
+
         var squares = [UIView]()
         
         for _ in 0..<16 {
             let view = UIView(frame: .zero)
-            view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            view.backgroundColor = UIColor(white: 0.5, alpha: 1)
             squares.append(view)
             self.containerView.addSubview(view)
         }
@@ -89,5 +92,13 @@ class ShufflingView: UIView {
         UIView.animate(withDuration: 30 / Constants.timeDivider, delay: 0, options: [.beginFromCurrentState, .overrideInheritedCurve], animations: {
             self.containerView.layer.transform = CATransform3DIdentity
         }, completion: nil)
+    }
+    
+    func fadeColors() {
+        UIView.animate(withDuration: 180 / Constants.timeDivider, animations: {
+            for view in self.squares {
+                view.backgroundColor = self.fadeColor
+            }
+        })
     }
 }

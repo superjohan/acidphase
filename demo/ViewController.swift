@@ -68,8 +68,15 @@ class ViewController: UIViewController {
         self.contentView.isHidden = true
         self.view.addSubview(self.contentView)
         
-        for _ in 0..<self.rotatedViewCount {
-            let rotatedView = ShufflingView(frame: .zero)
+        let colors = [
+            UIColor(red: (168.0 / 255.0), green: (173.0 / 255.0), blue: (168.0 / 255.0), alpha: 1.0),
+            UIColor(red: (249.0 / 255.0), green: (209.0 / 255.0), blue: (71.0 / 255.0), alpha: 1.0),
+            UIColor(red: (237.0 / 255.0), green: (72.0 / 255.0), blue: (56.0 / 255.0), alpha: 1.0),
+            UIColor(red: (68.0 / 255.0), green: (162.0 / 255.0), blue: (231.0 / 255.0), alpha: 1.0)
+        ]
+        
+        for i in 0..<self.rotatedViewCount {
+            let rotatedView = ShufflingView(frame: .zero, color: colors[i % 4])
             self.rotatedViews.append(rotatedView)
             self.contentView.addSubview(rotatedView)
         }
@@ -114,6 +121,7 @@ class ViewController: UIViewController {
                 height: length
             )
             
+            rotatedView.layer.compositingFilter = "multiplyBlendMode"
             rotatedView.adjustViews(toBoard: Board.initialBoard(), animated: false)
         }
     }
@@ -215,6 +223,10 @@ class ViewController: UIViewController {
             let board = sequence[self.sequenceCounter]
             
             rotatedView.adjustViews(toBoard: board, animated: true)
+
+            if self.sequenceCounter == 30 {
+                rotatedView.fadeColors()
+            }
 
             if self.sequenceCounter == self.sequenceCount / 4 {
                 let x: CGFloat = (CGFloat(index) / CGFloat(self.rotatedViewCount)) * self.view.bounds.width

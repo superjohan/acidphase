@@ -78,13 +78,17 @@ class ShufflingView: UIView {
         self.currentBoard = board
     }
     
-    func startRotation() {
+    func startRotation(doScale: Bool = false, scale: CGFloat = 1) {
         UIView.animate(withDuration: 110 / Constants.timeDivider, delay: 0, options: [.beginFromCurrentState, .overrideInheritedCurve], animations: {
             let angle = CGFloat.random(in: 3..<6.2)
             let x = CGFloat.random(in: 0..<1.0)
             let y = CGFloat.random(in: 0..<1.0)
 
             self.containerView.layer.transform = CATransform3DRotate(self.containerView.layer.transform, angle, x, y, 0)
+            
+            if (doScale) {
+                self.containerView.layer.transform = CATransform3DScale(self.containerView.layer.transform, scale, scale, scale)
+            }
         })
     }
     

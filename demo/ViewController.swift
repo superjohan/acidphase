@@ -248,8 +248,9 @@ class ViewController: UIViewController {
         }
         
         if self.sequenceCounter == self.sequenceCount / 2 {
-            for view in self.rotatedViews {
-                view.startRotation()
+            for (index, view) in self.rotatedViews.enumerated() {
+                let scale = 1.0 - (CGFloat(index) / CGFloat(self.rotatedViewCount))
+                view.startRotation(doScale: true, scale: scale)
             }
         }
 
